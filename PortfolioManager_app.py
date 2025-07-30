@@ -125,12 +125,15 @@ weights_df = pd.DataFrame({
     'Weight': optimal_weights
 })
 
-weights_df["Weight"] = (weights_df["Weight"] * 100).round(2)
-weights_df = weights_df.reset_index(drop=True)
+# Convertir a porcentaje y formatear
+weights_df["Weight"] = (weights_df["Weight"] * 100).round(2).astype(str) + "%"
 
-# Mostrar como tabla sin índice
+# Establecer el Ticker como índice (elimina la columna extra y se ve limpio)
+weights_df = weights_df.set_index("Ticker")
+
+# Mostrar tabla
 st.subheader("Portfolio Allocation")
-st.table(weights_df.style.format({"Weight": "{:.2f}%"}))
+st.dataframe(weights_df, use_container_width=True)
 
 # Pie Chart of Allocation
 st.subheader("Allocation Pie Chart")
