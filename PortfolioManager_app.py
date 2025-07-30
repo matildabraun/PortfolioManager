@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import streamlit as st
 import yfinance as yf
 import pandas as pd
@@ -16,7 +10,7 @@ from scipy.optimize import minimize
 import scipy.stats as stats
 
 
-# Streamlit App Title
+#App Title
 st.title("Portfolio Optimizer")
 
 # Sidebar Inputs
@@ -26,10 +20,13 @@ years = st.sidebar.slider("Select years of historical data:", 1, 10, 5)
 # Risk-Free Rate
 risk_free_input = st.sidebar.text_input("Risk-Free Rate (e.g., 0.042 for 4.2%)", value="0.042")
 try:
-    risk_free_rate = float(risk_free_input)
+    # Risk-Free Rate
+risk_free_input = st.sidebar.text_input("Risk-Free Rate (%)", value="4.2")
+try:
+    risk_free_rate = float(risk_free_input) / 100  # Convert to decimal
 except ValueError:
-    st.sidebar.error("Please enter a valid decimal number (e.g., 0.035 for 3.5%)")
-    risk_free_rate = 0.042  # Valor por defecto en caso de error
+    st.sidebar.error("Please enter a valid number (e.g., 4.2 for 4.2%)")
+    risk_free_rate = 0.042  # Default in case of error
 
 # Download Data
 end_date = datetime.today()
@@ -108,11 +105,6 @@ VaR_daily = -(port_return + z_score * port_volatility)
 # Escalar a VaR anual si quieres
 VaR_annual = VaR_daily * np.sqrt(252)
 
-# Mostrar en Streamlit
-st.metric("VaR diario (95%)", f"{VaR_daily:.4%}")
-st.metric("VaR anual (95%)", f"{VaR_annual:.2%}")
-
-
 # Display Metrics
 st.subheader("Portfolio Metrics")
 col1, col2, col3, col4, col5 = st.columns(5)
@@ -135,11 +127,10 @@ st.subheader("Portfolio Allocation")
 # Crear DataFrame con todos los tickers y pesos
 weights_df = pd.DataFrame({
     'Ticker': tickers,
-    'Weight': optimal_weights
-})
+    'Weight': optimal_weights})
 
-# Convertir pesos a porcentaje y redondear
-weights_df["Weight"] = (weights_df["Weight"] * 100).round(2)
+# Convertir pesos a porcentaje, redondear y formatear como string con %
+weights_df["Weight"] = (weights_df["Weight"] * 100).round(2).astype(str) + "%"
 
 # Mostrar tabla interactiva sin índice, con ancho completo
 st.dataframe(weights_df.reset_index(drop=True), use_container_width=True)
