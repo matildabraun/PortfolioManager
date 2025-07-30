@@ -127,10 +127,6 @@ weights_df = pd.DataFrame({
 # Convertir pesos a porcentaje, redondear y formatear como string con %
 weights_df["Weight"] = (weights_df["Weight"] * 100).round(2).astype(str) + "%"
 
-# Mostrar tabla interactiva sin índice, con ancho completo
-weights_df = weights_df.reset_index(drop=True)
-st.dataframe(weights_df, use_container_width=True)
-
 # Pie Chart of Allocation
 st.subheader("Allocation Pie Chart")
 
