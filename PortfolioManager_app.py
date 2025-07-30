@@ -132,7 +132,6 @@ weights_df["Weight"] = (weights_df["Weight"] * 100).round(2).astype(str) + "%"
 weights_df = weights_df.set_index("Ticker")
 
 # Mostrar tabla
-st.subheader("Portfolio Allocation")
 st.dataframe(weights_df, use_container_width=True)
 
 # Pie Chart of Allocation
