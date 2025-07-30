@@ -131,7 +131,7 @@ weights_df = weights_df.reset_index(drop=True)
 
 st.dataframe(
     weights_df.style.format({"Weight": "{:.2f}%"}),
-    use_container_width=True
+    use_container_width=True)
 
 # Pie Chart of Allocation
 st.subheader("Allocation Pie Chart")
