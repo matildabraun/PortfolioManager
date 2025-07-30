@@ -128,7 +128,8 @@ weights_df = pd.DataFrame({
 weights_df["Weight"] = (weights_df["Weight"] * 100).round(2).astype(str) + "%"
 
 # Mostrar tabla interactiva sin índice, con ancho completo
-st.dataframe(weights_df.reset_index(drop=True), use_container_width=True)
+weights_df = weights_df.reset_index(drop=True)
+st.dataframe(weights_df, use_container_width=True)
 
 # Pie Chart of Allocation
 st.subheader("Allocation Pie Chart")
