@@ -82,8 +82,7 @@ sns.heatmap(
     vmax=max_val,
     fmt=".6f",
     linewidths=0.5,
-    linecolor="white"
-)
+    linecolor="white")
 st.pyplot(fig)
 
 # Nivel de confianza para VaR
@@ -104,10 +103,12 @@ VaR_annual = VaR_daily * np.sqrt(252)
 
 # Display Metrics
 st.subheader("Portfolio Metrics")
-col1, col2, col3, col4, col5 = st.columns(5)
+col1, col2, col3 = st.columns(3)
 col1.metric("Expected Return (Annual)", f"{expected_return:.2%}")
 col2.metric("Volatility (Annual)", f"{expected_volatility:.2%}")
 col3.metric("Sharpe Ratio", f"{sharpe:.2f}")
+
+col4, col5 = st.columns(2)
 col4.metric("Daily VaR (95%)", f"{VaR_daily:.4%}")
 col5.metric("Anual VaR (95%)", f"{VaR_annual:.2%}")
 
@@ -143,19 +144,11 @@ if filtered_weights:
     fig = px.pie(
     names=labels,
     values=weights,
-    hole=0.3,  # estilo donut
+    hole=0.3,  
     width=700,
-    height=700
-)
+    height=700)
 
 fig.update_traces(textinfo='percent+label')
 fig.update_layout(margin=dict(t=50, b=50, l=50, r=50))
 
 st.plotly_chart(fig)
-
-
-# In[ ]:
-
-
-
-
