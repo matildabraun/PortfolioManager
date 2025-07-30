@@ -20,8 +20,7 @@ years = st.sidebar.slider("Select years of historical data:", 1, 10, 5)
 # Risk-Free Rate
 risk_free_input = st.sidebar.text_input("Risk-Free Rate (e.g., 0.042 for 4.2%)", value="0.042")
 try:
-    # Risk-Free Rate
-risk_free_input = st.sidebar.text_input("Risk-Free Rate (%)", value="4.2")
+    risk_free_input = st.sidebar.text_input("Risk-Free Rate (%)", value="4.2")
 try:
     risk_free_rate = float(risk_free_input) / 100  # Convert to decimal
 except ValueError:
