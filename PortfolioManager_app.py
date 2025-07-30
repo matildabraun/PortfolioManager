@@ -17,15 +17,13 @@ st.title("Portfolio Optimizer")
 st.sidebar.header("User Input")
 tickers = st.sidebar.text_input("Enter tickers (comma-separated):", "SPY, BND, GLD, QQQ, VTI").upper().split(",")
 years = st.sidebar.slider("Select years of historical data:", 1, 10, 5)
-# Risk-Free Rate
-risk_free_input = st.sidebar.text_input("Risk-Free Rate (e.g., 0.042 for 4.2%)", value="0.042")
+
+risk_free_input = st.sidebar.text_input("Risk-Free Rate (%)", value="4.2")
 try:
-    risk_free_input = st.sidebar.text_input("Risk-Free Rate (%)", value="4.2")
-try:
-    risk_free_rate = float(risk_free_input) / 100  # Convert to decimal
+    risk_free_rate = float(risk_free_input) / 100  # convierte 4.2 a 0.042
 except ValueError:
     st.sidebar.error("Please enter a valid number (e.g., 4.2 for 4.2%)")
-    risk_free_rate = 0.042  # Default in case of error
+    risk_free_rate = 0.042  # Valor por defecto en caso de error
 
 # Download Data
 end_date = datetime.today()
