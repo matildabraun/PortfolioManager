@@ -9,7 +9,6 @@ from datetime import datetime, timedelta
 from scipy.optimize import minimize
 import scipy.stats as stats
 
-
 #App Title
 st.title("Portfolio Optimizer")
 
@@ -37,7 +36,6 @@ for ticker in tickers:
 # Log Returns
 log_returns = np.log(adj_close_df / adj_close_df.shift(1)).dropna()
 cov_matrix = log_returns.cov() * 252
-
 
 # Optimization Functions
 def standard_deviation(weight, cov_matrix):
@@ -111,7 +109,6 @@ col3.metric("Sharpe Ratio", f"{sharpe:.2f}")
 col4, col5 = st.columns(2)
 col4.metric("Daily VaR (95%)", f"{VaR_daily:.4%}")
 col5.metric("Anual VaR (95%)", f"{VaR_annual:.2%}")
-
 
 #Note for interpretation
 st.markdown("<small><i>Note: The Sharpe Ratio measures risk-adjusted return — a value above 1 is generally considered good. "
