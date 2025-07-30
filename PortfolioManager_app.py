@@ -119,19 +119,18 @@ st.markdown("<small><i>Note: The Sharpe Ratio measures risk-adjusted return — 
 # Display Optimal Weights as a Table
 st.subheader("Portfolio Allocation")
 
-# Crear DataFrame con todos los tickers y pesos
+# Crear DataFrame
 weights_df = pd.DataFrame({
     'Ticker': tickers,
-    'Weight': optimal_weights})
+    'Weight': optimal_weights
+})
 
-# Convertir pesos a porcentaje
 weights_df["Weight"] = (weights_df["Weight"] * 100).round(2)
-
 weights_df = weights_df.reset_index(drop=True)
 
-st.dataframe(
-    weights_df.style.format({"Weight": "{:.2f}%"}),
-    use_container_width=True)
+# Mostrar como tabla sin índice
+st.subheader("Portfolio Allocation")
+st.table(weights_df.style.format({"Weight": "{:.2f}%"}))
 
 # Pie Chart of Allocation
 st.subheader("Allocation Pie Chart")
